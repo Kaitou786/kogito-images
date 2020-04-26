@@ -38,7 +38,7 @@ pipeline{
         }
         stage('Build and test kogito-data-index image '){
             steps{
-                sh "cd kogito-images && make kogito-data-index"
+                sh "make kogito-data-index"
             }
         }
         stage('Build and test kogito-jobs-service image '){

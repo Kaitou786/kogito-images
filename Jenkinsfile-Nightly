@@ -8,32 +8,32 @@ pipeline{
         }
         stage('Prepare offline kogito-examples'){
             steps{
-                sh "cd kogito-images && make clone-repos"
+                sh "make clone-repos"
             }
         }
         stage('Build and test kogito-quarkus-ubi8 image'){
             steps{
-                sh "cd kogito-images && make kogito-quarkus-ubi8"
+                sh "make kogito-quarkus-ubi8"
             }
         }
         stage('Build and test kogito-quarkus-jvm-ubi8 image'){
             steps{
-                sh "cd kogito-images && make kogito-quarkus-jvm-ubi8"
+                sh "make kogito-quarkus-jvm-ubi8"
             }
         }
         stage('Build and test kogito-quarkus-ubi8-s2i image'){
             steps{
-                sh "cd kogito-images && make kogito-quarkus-ubi8-s2i"
+                sh "make kogito-quarkus-ubi8-s2i"
             }
         }
         stage('Build and test kogito-springboot-ubi8 image'){
             steps{
-                sh "cd kogito-images && make kogito-springboot-ubi8"
+                sh "make kogito-springboot-ubi8"
             }
         }
         stage('Build and test kogito-springboot-ubi8-s2i image '){
             steps{
-                sh "cd kogito-images && make kogito-springboot-ubi8-s2i"
+                sh "make kogito-springboot-ubi8-s2i"
             }
         }
         stage('Build and test kogito-data-index image '){
@@ -43,25 +43,25 @@ pipeline{
         }
         stage('Build and test kogito-jobs-service image '){
             steps{
-                sh "cd kogito-images && make kogito-jobs-service"
+                sh "make kogito-jobs-service"
             }
         }
         stage('Build and test kogito-management-console image '){
             steps{
-                sh "cd kogito-images && make kogito-management-console"
+                sh "make kogito-management-console"
             }
         }
         stage('Tagging'){
             steps{
                 sh """
-                docker tag quay.io/kiegroup/kogito-quarkus-ubi8:latest                    quay.io/kiegroup/kogito-quarkus-ubi8-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
+                        docker tag quay.io/kiegroup/kogito-quarkus-ubi8:latest                    quay.io/kiegroup/kogito-quarkus-ubi8-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
 	        	docker tag quay.io/kiegroup/kogito-quarkus-jvm-ubi8:latest                quay.io/kiegroup/kogito-quarkus-jvm-ubi8-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
-	            docker tag quay.io/kiegroup/kogito-quarkus-ubi8-s2i:latest                quay.io/kiegroup/kogito-quarkus-ubi8-s2i-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
-	            docker tag quay.io/kiegroup/kogito-springboot-ubi8:latest                 quay.io/kiegroup/kogito-springboot-ubi8-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
+	                docker tag quay.io/kiegroup/kogito-quarkus-ubi8-s2i:latest                quay.io/kiegroup/kogito-quarkus-ubi8-s2i-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
+	                docker tag quay.io/kiegroup/kogito-springboot-ubi8:latest                 quay.io/kiegroup/kogito-springboot-ubi8-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
 	        	docker tag quay.io/kiegroup/kogito-springboot-ubi8-s2i:latest             quay.io/kiegroup/kogito-springboot-ubi8-s2i-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
-                docker tag quay.io/kiegroup/kogito-data-index:latest                      quay.io/kiegroup/kogito-data-index-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
-	            docker tag quay.io/kiegroup/kogito-jobs-service:latest                    quay.io/kiegroup/kogito-jobs-service-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
-	            docker tag quay.io/kiegroup/kogito-management-console:latest              quay.io/kiegroup/kogito-management-console-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
+                        docker tag quay.io/kiegroup/kogito-data-index:latest                      quay.io/kiegroup/kogito-data-index-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
+	                docker tag quay.io/kiegroup/kogito-jobs-service:latest                    quay.io/kiegroup/kogito-jobs-service-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
+	                docker tag quay.io/kiegroup/kogito-management-console:latest              quay.io/kiegroup/kogito-management-console-nightly:\$(echo \${GIT_COMMIT} | cut -c1-7)
 	            """
             }
         }
@@ -78,7 +78,7 @@ pipeline{
     }
     post{
         always{
-            junit 'kogito-images/target/test/results/*.xml'
+            junit 'target/test/results/*.xml'
         }
     }
 }

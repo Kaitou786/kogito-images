@@ -1,4 +1,5 @@
-def call(){    
+def call(){
+        pipeline{
         stages{
             stage('Initialization'){
                 steps{
@@ -57,3 +58,4 @@ def call(){
             }
         }
     }
+}

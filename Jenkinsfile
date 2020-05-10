@@ -1,6 +1,6 @@
 @Library('Kogito_Images') _
-node{
-    buildAndTestImages()
+buildAndTestImages()
+node('jenkins-slave'){
     stage('Finishing'){
         sh "docker rmi \$(docker images -q) || date"
     }

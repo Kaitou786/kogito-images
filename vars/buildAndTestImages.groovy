@@ -1,5 +1,6 @@
 def call(){
         pipeline{
+        agent { label 'jenkins-slave'}
         stages{
             stage('Initialization'){
                 steps{

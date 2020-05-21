@@ -43,14 +43,14 @@ pipeline{
         }
         stage('Build and test Images'){
             parallel{
-        stage('Build and test kogito-jobs-service image '){
+        stage('Build and test kogito-quarkus-ubi8 image'){
             steps{
-                sh "make kogito-jobs-service"
+                sh "make kogito-quarkus-ubi8"
             }
         }
-        stage('Build and test kogito-management-console image '){
+        stage('Build and test kogito-quarkus-jvm-ubi8 image'){
             steps{
-                sh "make kogito-management-console"
+                sh "make kogito-quarkus-jvm-ubi8"
             }
         }
             }

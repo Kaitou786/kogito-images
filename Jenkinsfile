@@ -46,11 +46,6 @@ pipeline{
                 sh "make kogito-jobs-service"
             }
         }
-        stage('Build and test kogito-management-console image '){
-            steps{
-                sh "make kogito-management-console"
-            }
-        }
         stage('Finishing'){
             steps{
                 sh "docker rmi -f \$(docker images -q) || date"

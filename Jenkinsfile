@@ -53,7 +53,7 @@ pipeline{
         }
         stage('Finishing'){
             steps{
-                sh "docker rmi -f \$(docker images -q) || date"
+                sh "docker rm -f \$(docker ps -a -q) || docker rmi -f \$(docker images -q) || date"
             }
         }
     }

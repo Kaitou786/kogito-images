@@ -48,9 +48,9 @@ pipeline{
                 sh "make kogito-quarkus-ubi8"
             }
         }
-        stage('Build and test kogito-quarkus-jvm-ubi8 image'){
+         stage('Build and test kogito-quarkus-ubi8-s2i image'){
             steps{
-                sh "make kogito-quarkus-jvm-ubi8"
+                sh "make kogito-quarkus-ubi8-s2i"
             }
         }
             }

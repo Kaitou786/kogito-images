@@ -36,6 +36,15 @@ pipeline{
                 """
             }
         }
+        stgae('Create copys'){
+            steps{
+                 sh "rm -rf /app/jenkins/workspace/temp/ && mkdir -p /app/jenkins/workspace/temp/
+                sh  "cp -R .  /app/jenkins/workspace/temp/"
+                sh " ls -l"
+                echo "========="
+                sh "ls -l /app/jenkins/workspace/temp/"
+            }
+        }
         stage('Prepare offline kogito-examples'){
             steps{
                 sh "make clone-repos"
@@ -50,7 +59,7 @@ pipeline{
         }
           stage('Build and test kogito-jobs-service image '){
             steps{
-                sh "make kogito-jobs-service"
+                sh "cd /app/jenkins/workspace/temp/ && make kogito-jobs-service"
             }
         }
             }

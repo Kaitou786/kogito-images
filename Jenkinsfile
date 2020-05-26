@@ -39,13 +39,13 @@ pipeline{
         stage('Create copys'){
             steps{
                  sh """
-                 rm -rf /app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ \
-                /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ \
-                /app/jenkins/workspace/kogito-springboot-ubi8/ \
-                /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ \
-                /app/jenkins/workspace/kogito-data-index/ \
-                /app/jenkins/workspace/kogito-jobs-service/ \ 
-                /app/jenkins/workspace/kogito-management-console
+                 rm -rf  /app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ 
+                 rm -rf  /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ 
+                 rm -rf  /app/jenkins/workspace/kogito-springboot-ubi8/ 
+                 rm -rf  /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ 
+                 rm -rf  /app/jenkins/workspace/kogito-data-index/ 
+                 rm -rf  /app/jenkins/workspace/kogito-jobs-service/  
+                 rm -rf  /app/jenkins/workspace/kogito-management-console
                  """
                 sh """
                 mkdir -p /app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ \

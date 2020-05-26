@@ -56,8 +56,17 @@ pipeline{
                 mkdir -p /app/jenkins/workspace/kogito-jobs-service/ 
                 mkdir -p /app/jenkins/workspace/kogito-management-console
                 """
-                sh  "echo '/app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ /app/jenkins/workspace/kogito-springboot-ubi8/ /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ /app/jenkins/workspace/kogito-data-index/ /app/jenkins/workspace/kogito-jobs-service/ /app/jenkins/workspace/kogito-management-console' | xargs -n 1 sudo cp -R ."
-            }
+                
+                sh """
+                cp -R . /app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ 
+                cp -R . /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ 
+                cp -R . /app/jenkins/workspace/kogito-springboot-ubi8/ 
+                cp -R . /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ 
+                cp -R . /app/jenkins/workspace/kogito-data-index/
+                cp -R . /app/jenkins/workspace/kogito-jobs-service/ 
+                cp -R . /app/jenkins/workspace/kogito-management-console
+                """
+                }
         }
         stage('Prepare offline kogito-examples'){
             steps{

@@ -38,7 +38,7 @@ pipeline{
         }
         stgae('Create copys'){
             steps{
-                 sh "rm -rf /app/jenkins/workspace/temp/ && mkdir -p /app/jenkins/workspace/temp/
+                 sh "rm -rf /app/jenkins/workspace/temp/ && mkdir -p /app/jenkins/workspace/temp/"
                 sh  "cp -R .  /app/jenkins/workspace/temp/"
                 sh " ls -l"
                 echo "========="

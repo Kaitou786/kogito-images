@@ -48,9 +48,9 @@ pipeline{
                 sh "make kogito-quarkus-ubi8"
             }
         }
-          stage('Build and test kogito-data-index image '){
+          stage('Build and test kogito-jobs-service image '){
             steps{
-                sh "make kogito-data-index"
+                sh "make kogito-jobs-service"
             }
         }
             }

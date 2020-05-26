@@ -115,6 +115,7 @@ void cleanWorkspaces(){
     for(String imageName : IMAGES){
         sh "rm -rf /app/jenkins/workspace/$imageName"
     }
+}
 void createWorkspaces() {
         for(String imageName : IMAGES){
         sh "mkdir -p /app/jenkins/workspace/$imageName"
@@ -123,5 +124,5 @@ void createWorkspaces() {
 void copyWorkspaces(){
    for(String imageName : IMAGES){
         sh "cp -R . /app/jenkins/workspace/$imageName"
-}     
-    }
+        }     
+}

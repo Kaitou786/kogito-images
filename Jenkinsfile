@@ -48,13 +48,13 @@ pipeline{
                  rm -rf  /app/jenkins/workspace/kogito-management-console
                  """
                 sh """
-                mkdir -p /app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ \
-                /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ \
-                /app/jenkins/workspace/kogito-springboot-ubi8/ \
-                /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ \
-                /app/jenkins/workspace/kogito-data-index/ \
-                /app/jenkins/workspace/kogito-jobs-service/ \ 
-                /app/jenkins/workspace/kogito-management-console
+                mkdir -p /app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ 
+                mkdir -p /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ 
+                mkdir -p /app/jenkins/workspace/kogito-springboot-ubi8/ 
+                mkdir -p /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ 
+                mkdir -p /app/jenkins/workspace/kogito-data-index/ 
+                mkdir -p /app/jenkins/workspace/kogito-jobs-service/ 
+                mkdir -p /app/jenkins/workspace/kogito-management-console
                 """
                 sh  "echo '/app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ /app/jenkins/workspace/kogito-springboot-ubi8/ /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ /app/jenkins/workspace/kogito-data-index/ /app/jenkins/workspace/kogito-jobs-service/ /app/jenkins/workspace/kogito-management-console' | xargs -n 1 cp -R ."
             }

@@ -38,11 +38,25 @@ pipeline{
         }
         stage('Create copys'){
             steps{
-                 sh "rm -rf /app/jenkins/workspace/temp/ && mkdir -p /app/jenkins/workspace/temp/"
-                sh  "cp -R .  /app/jenkins/workspace/temp/"
-                sh " ls -l"
-                echo "========="
-                sh "ls -l /app/jenkins/workspace/temp/"
+                 sh """
+                 rm -rf /app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ \
+                /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ \
+                /app/jenkins/workspace/kogito-springboot-ubi8/ \
+                /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ \
+                /app/jenkins/workspace/kogito-data-index/ \
+                /app/jenkins/workspace/kogito-jobs-service/ \ 
+                /app/jenkins/workspace/kogito-management-console
+                 """
+                sh """
+                mkdir -p /app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ \
+                /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ \
+                /app/jenkins/workspace/kogito-springboot-ubi8/ \
+                /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ \
+                /app/jenkins/workspace/kogito-data-index/ \
+                /app/jenkins/workspace/kogito-jobs-service/ \ 
+                /app/jenkins/workspace/kogito-management-console
+                """
+                sh  "echo '/app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ /app/jenkins/workspace/kogito-springboot-ubi8/ /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ /app/jenkins/workspace/kogito-data-index/ /app/jenkins/workspace/kogito-jobs-service/ /app/jenkins/workspace/kogito-management-console' | xargs -n 1 cp -R ."
             }
         }
         stage('Prepare offline kogito-examples'){
@@ -57,9 +71,39 @@ pipeline{
                 sh "make kogito-quarkus-ubi8"
             }
         }
-          stage('Build and test kogito-jobs-service image '){
+          stage('Build and test kogito-quarkus-jvm-ubi8 image'){
             steps{
-                sh "cd /app/jenkins/workspace/temp/ && make kogito-jobs-service"
+                sh "cd /app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ && make kogito-quarkus-jvm-ubi8"
+            }
+        }
+        stage('Build and test kogito-quarkus-ubi8-s2i image'){
+            steps{
+                sh "cd /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ && make kogito-quarkus-ubi8-s2i"
+            }
+        }
+        stage('Build and test kogito-springboot-ubi8 image'){
+            steps{
+                sh "cd /app/jenkins/workspace/kogito-springboot-ubi8/ && make kogito-springboot-ubi8"
+            }
+        }
+        stage('Build and test kogito-springboot-ubi8-s2i image '){
+            steps{
+                sh "cd /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ && make kogito-springboot-ubi8-s2i"
+            }
+        }
+        stage('Build and test kogito-data-index image '){
+            steps{
+                sh "cd /app/jenkins/workspace/kogito-data-index/  && make kogito-data-index"
+            }
+        }
+        stage('Build and test kogito-jobs-service image '){
+            steps{
+                sh "cd /app/jenkins/workspace/kogito-jobs-service/ && make kogito-jobs-service"
+            }
+        }
+        stage('Build and test kogito-management-console image '){
+            steps{
+                sh "cd /app/jenkins/workspace/kogito-management-console && make kogito-management-console"
             }
         }
             }

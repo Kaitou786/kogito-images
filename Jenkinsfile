@@ -48,9 +48,9 @@ pipeline{
                 sh "make kogito-quarkus-ubi8"
             }
         }
-          stage('Build and test kogito-springboot-ubi8-s2i image '){
+          stage('Build and test kogito-data-index image '){
             steps{
-                sh "make kogito-springboot-ubi8-s2i"
+                sh "make kogito-data-index"
             }
         }
             }

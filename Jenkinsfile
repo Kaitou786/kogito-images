@@ -7,6 +7,14 @@ def buildNumber = env.BUILD_NUMBER as int
 if (buildNumber > 1) milestone(buildNumber - 1)
 milestone(buildNumber)
 
+IMAGES = [  "kogito-quarkus-jvm-ubi8",
+            "kogito-quarkus-ubi8-s2i",
+            "kogito-springboot-ubi8",
+            "kogito-springboot-ubi8-s2i",
+            "kogito-data-index",
+            "kogito-jobs-service",
+            "kogito-management-console"]
+
 pipeline{
     agent { label 'jenkins-slave'}
     stages{
@@ -38,34 +46,11 @@ pipeline{
         }
         stage('Create copys'){
             steps{
-                 sh """
-                 sudo rm -rf  /app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ 
-                 sudo rm -rf  /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ 
-                 sudo rm -rf  /app/jenkins/workspace/kogito-springboot-ubi8/ 
-                 sudo rm -rf  /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ 
-                 sudo rm -rf  /app/jenkins/workspace/kogito-data-index/ 
-                 sudo rm -rf  /app/jenkins/workspace/kogito-jobs-service/  
-                 sudo rm -rf  /app/jenkins/workspace/kogito-management-console
-                 """
-                sh """
-                mkdir -p /app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ 
-                mkdir -p /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ 
-                mkdir -p /app/jenkins/workspace/kogito-springboot-ubi8/ 
-                mkdir -p /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ 
-                mkdir -p /app/jenkins/workspace/kogito-data-index/ 
-                mkdir -p /app/jenkins/workspace/kogito-jobs-service/ 
-                mkdir -p /app/jenkins/workspace/kogito-management-console
-                """
-                
-                sh """
-                cp -R . /app/jenkins/workspace/kogito-quarkus-jvm-ubi8/ 
-                cp -R . /app/jenkins/workspace/kogito-quarkus-ubi8-s2i/ 
-                cp -R . /app/jenkins/workspace/kogito-springboot-ubi8/ 
-                cp -R . /app/jenkins/workspace/kogito-springboot-ubi8-s2i/ 
-                cp -R . /app/jenkins/workspace/kogito-data-index/
-                cp -R . /app/jenkins/workspace/kogito-jobs-service/ 
-                cp -R . /app/jenkins/workspace/kogito-management-console
-                """
+                script{
+                    cleanWorkspaces()
+                    createWorkspaces()
+                    copyWorkspaces()
+                }
                 }
         }
         stage('Prepare offline kogito-examples'){
@@ -124,3 +109,19 @@ pipeline{
         }
     }
 }
+
+
+void cleanWorkspaces(){
+    for(String imageName : IMAGES){
+        sh "rm -rf /app/jenkins/workspace/$imageName"
+    }
+void createWorkspaces() {
+        for(String imageName : IMAGES){
+        sh "mkdir -p /app/jenkins/workspace/$imageName"
+    }
+}
+void copyWorkspaces(){
+   for(String imageName : IMAGES){
+        sh "cp -R . /app/jenkins/workspace/$imageName"
+}     
+    }

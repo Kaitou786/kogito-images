@@ -8,7 +8,11 @@ if (buildNumber > 1) milestone(buildNumber - 1)
 milestone(buildNumber)
 
 pipeline{
-    agent { label 'jenkins-slave'}
+    agent { label 'tarun'}
+    tools {
+        maven 'kie-maven-3.5.4'
+        jdk 'kie-jdk1.8'
+    }
     stages{
         stage('Initialization'){
             steps{
